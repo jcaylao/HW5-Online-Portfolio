@@ -13,12 +13,22 @@
         :root {
             --background-color: white;
             --text-color: black;
-            --image-filter: none; /* Default filter for light mode */
+            --image-filter: none;
+            /*Card Styling*/
+            --card-bg: white;
+            --card-text-color: black;
+            --card-shadow: rgba(0, 0, 0, 0.5);
+            --atext-color: rgba(27, 74, 232);
         }
         [data-theme="dark"] {
             --background-color: black;
             --text-color: white;
-            --image-filter: invert(1); /* Invert colors for dark mode */
+            --image-filter: invert(1);
+            /*Card Styling*/
+            --card-bg: #1a1a1a;
+            --card-shadow: rgba(0, 0, 0, 0.5);
+            --card-text-color: white;
+            --atext-color: rgb(148, 172, 255);
         }
         body {
             background-color: var(--background-color);
@@ -39,7 +49,7 @@
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr 1fr;
-                grid-template-rows: 0.5fr 0.1fr 1fr;
+                grid-template-rows: 0.1fr 0.1fr 1fr;
                 grid-template-areas:
                 "nav nav"
                 "h1 h1"
@@ -131,7 +141,7 @@
                         }
                         h2 {margin: 0; font-size: 1.2rem;}
                         p {font-size: 1rem; color: var(--text-color);}
-                        a {color: blue; text-decoration: none;}
+                        a {color: var(--atext-color); text-decoration: none;}
                         picture img{max-width: 100%; border-radius: 5px;}
                     </style>
                     <h2></h2>
@@ -139,7 +149,7 @@
                         <img src="" alt="">
                     </picture>
                     <p></p>
-                    <a href="#" target="_blank">Click here to see Figma design</a>
+                    <a href="#" target="_blank">Click here to see more</a>
                 `;
             }
             connectedCallback() {
