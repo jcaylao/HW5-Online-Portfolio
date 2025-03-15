@@ -1,0 +1,43 @@
+:root {
+    --primary-bg: white;
+    --text-color: black;
+    --nav-bg: #6d2932;
+    --nav-ul-li-a-text-color: white;
+    --nav-ul-li-a-hover-bg-color: #97595e;
+    --nav-ul-li-a-hover-text-color: white;
+    --background-color: white;
+    --image-filter: none; /* Default filter for light mode */
+}
+
+body {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    padding: 0;
+    margin: 0;
+}
+
+/* Nav bar styling */
+nav {
+    grid-area: nav;
+    background-color: #6d2932;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav ul li a {
+    display: block;
+    width: 100%;
+    padding: 20px 0 20px 0;
+    text-decoration: none;
+    color: white;
+    font-size: calc(1.2dvw + 1dvh);
+    background: transparent;
+}
+nav ul li a:hover {
+    background: #97595e;
+    color: #fff;
+}

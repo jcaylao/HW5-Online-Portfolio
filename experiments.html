@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online Portfolio with HTML ONLY">
+    <meta name="keywords" content="HTML">
+    <meta name="author" content="Jaira">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/main.css" rel="stylesheet">
+    <title>Experiments page</title>
+    <style>
+        /*Styling my custom element TESTING*/
+        my-layout {
+            display: block; /* Ensure the custom element behaves as a block */
+        }
+
+        my-layout nav {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        my-layout nav h1 {
+            text-align: center;
+        }
+
+        my-layout nav ul {
+            list-style: none; /* Remove bullet points */
+            padding: 0;
+            margin: 0;
+            display: flex; /* horizontal layout */
+            gap: 20px; /* Space between navigation items */
+        }
+
+        my-layout nav ul li a {
+            color: #fff; /* White text for links */
+            text-decoration: none; /* Remove underline */
+            font-size: 1.1em;
+            padding: 10px 15px;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+        }
+
+        my-layout nav ul li a:hover {
+            background-color: #daa9e1; /* Highlight color on hover */
+            color: #333; /* Dark text on hover for contrast */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <section id="exp-dialog">
+            <dialog open>
+                <h2>Warning!</h2>
+                <p>This page is under construction. This is an experimental page.</p>
+                <p>This close button is currently not working. The <code>close()</code> method is not currently implemented</p>
+                <button onclick="close()">Close</button>
+            </dialog>
+        </section>
+
+        <div class="navigationBar>">
+            <my-layout>
+                <nav>
+                    <h1>Jaira's Online Portfolio</h1>
+                    <ul>
+                        <li><a href="index.html">About Me</a></li>
+                        <li><a href="skills.html">Skills</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact Me</a></li>
+                        <li><a href="experiments.html">Experiments</a></li>
+                    </ul>
+                </nav>
+            </my-layout>
+        </div>
+    </header><hr>
+
+    <main>
+
+                <pre>
+Here I will          ,╱|、
+be displaying       (˚ˎ 。7
+a list of            |、˜〵
+experimental tags    じしˍ,)ノ
+        </pre>
+        <p>If images are not displaying correctly, please press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> to
+            refresh the page.</p><hr>
+
+        <section>
+            <h2>Testing search tag</h2>
+            <search>
+                <form action="./search/">
+                    <label for="search-site"></label>
+                    <input type="search" id="search-site" name="q" placeholder="Search my site...">
+                    <button type="submit">Search</button>
+                </form>
+            </search>
+        </section>
+
+        <section id="exp-ins-del">
+            <h3>Testing ins & del tags</h3>
+            <p>Some of my current favorite shows are Modern Family, <del>Desperate Housewives</del> <ins
+               datetime="2025-02-03">Single's Inferno</ins> , and Love Island.</p>
+        </section>
+
+        <section id="exp-iframe">
+            <h3>Testing out iframe with the About Me page of my online portfolio</h3>
+            <iframe src="https://jaira-portfolio.netlify.app/" width="500" height="300"></iframe>
+        </section>
+
+        <section id="exp-svg">
+            <h3>Silly attempt at a heart with svg</h3>
+            <svg viewBox="0 0 100 100" width="100" height="100">
+                <path d="M50 80
+                     C 20 50, 5 20, 30 10
+                     C 50 0, 70 10, 70 30
+                     C 70 10, 90 0, 100 30
+                     C 100 50, 80 80, 50 80
+                     Z"
+                      fill="red" stroke="black" stroke-width="2"/>
+                <text x="50" y ="50" font-size="20" fill="white">Hi</text>
+            </svg>
+        </section>
+
+        <section id="exp-canvas">
+            <h3>Experimenting with canvas tag</h3>
+            <canvas id="my-canvas" width="100" height="100" style="border:1px solid #000000;"></canvas>
+            <p>This is only a placeholder because I am currently unable to use JavaScript.</p>
+        </section>
+
+        <section id="exp-template">
+            <h3>Experimenting with template tag</h3>
+            <template id="hidden-message">
+                <h2>Here is a hidden message!</h2>
+                <p>This a hidden message because I am unable to use JavaScript.</p>
+            </template>
+        </section>
+
+        <section id="exp-audio">
+            <h3>Experimenting with audio tag</h3>
+            <audio controls>
+                <source src="images/for-her-chill-upbeat-summel-travel-vlog-and-ig-music-royalty-free-use-202298.mp3" type="audio/mp3">
+                Your browser does not support the audio tag.
+            </audio>
+        </section>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online Portfolio with HTML ONLY">
+    <meta name="keywords" content="HTML">
+    <meta name="author" content="Jaira">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/main.css" rel="stylesheet">
+    <title>Contact page</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1.5fr 1.5fr 0.5fr 1fr 1fr 1fr 0.5fr 1.7fr;
+            grid-template-rows: 1fr 1fr 2fr 1fr;
+            grid-template-areas:
+            "h1 h1 . git email insta . nav"
+            ". form form form form form . nav"
+            ". form form form form form . nav"
+            ". form form form form form . nav"
+        }
+        h1 {
+            grid-area: h1;
+            font-size: calc(2.7dvw + 1dvh);
+            padding-left: 20px;
+        }
+        #git {grid-area: git;}
+        #insta {grid-area: insta;}
+        #email {grid-area: email;}
+
+        /*Form styling*/
+        form {
+            grid-area: form;
+            font-size: calc(1dvw + 1dvh);
+            max-width: 400px;
+            padding: 20px;
+            background: color(display-p3 0.95 0.95 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 5px;
+            color: color-mix(in srgb, black 70%, white 30%);
+        }
+        select,
+        input {
+            width: 100%;
+            padding: 10px 0 10px 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s ease-in-out, background 0.3s ease-in-out;
+        }
+        select:focus,
+        input:focus {
+            border: 1px solid color(display-p3 0 0.5 1);
+            outline: none;
+            box-shadow: 0 0 5px color-mix(in srgb, blue 50%, white 50%);
+        }
+        input:user-invalid {
+            border: 2px solid red;
+        }
+        *:required {
+            background-color: palegoldenrod;
+        }
+        button {
+            font-size: 0.9em;
+            padding: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px 0 10px 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s ease-in-out, background 0.3s ease-in-out;
+            resize: none;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* Invalid input in form */
+        form:has(select:invalid) button {
+            background-color: gray;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        form:not(:has(select:invalid)) button {
+            background-color: color-mix(in srgb, #4aff00 70%, #000000 30%);
+            cursor: pointer;
+            pointer-events: auto;
+            animation: pulse 1s infinite ease-in-out;
+        }
+        img {
+            display: flex;
+            width: 5dvw;
+            height: 5dvw;
+            padding: 25px;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h2 {
+            font-size: calc(1.2dvw + 1dvh);
+        }
+        /* Mobile*/
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr;
+                grid-template-areas:
+                "nav"
+                "h1"
+                "git"
+                "insta"
+                "email"
+                "form";
+            }
+            img {
+                margin-left: 50px;
+            }
+            form {
+                max-width: 40%;
+                padding: 15px;
+                margin: 20px;
+            }
+            label {
+                font-size: 0.9em;
+            }
+            select,
+            input {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            button {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+        }
+        /* Tablet & restrictive laptops*/
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: 0.5fr 1fr 2fr 2fr;
+                grid-template-areas:
+                "h1 h1 h1 nav"
+                "git insta email nav"
+                "form form form nav"
+                ". . . nav";
+            }
+            form {
+                max-width: 450px;
+                padding: 18px;
+                margin: 20px;
+            }
+            label {
+                font-size: 1em;
+            }
+            select,
+            input {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <nav id = "nav-sidebar">
+            <ul>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+        <h1>Contact Me</h1>
+        <section id="git">
+            <a href="https://github.com/jcaylao">
+                <img src="images/Git-Icon.svg" alt="Github icon">
+            </a>
+        </section>
+        <section id="email">
+            <a href="mailto:jairavcaylao@gmail.com">
+                <img src="images/Email-icon.svg" alt="Email icon">
+            </a>
+        </section>
+        <section id="insta">
+            <a href="https://www.instagram.com/cayjaira/">
+                <img src="images/Insta-Icon.svg" alt="Instagram icon">
+            </a>
+        </section>
+
+        <form action="https://httpbin.org/post" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="form-email" name="email" required>
+
+            <label for="phone-number">Phone Number<span aria-hidden="true"></span>:</label>
+            <input type="tel" id="phone-number" name="phone-number" pattern="\d{3}-\d{3}-\d{4}"
+                   placeholder="123-456-7890">
+
+            <label for="comments">Comments <span aria-hidden="true">(max 300 char)</span>:</label>
+            <textarea id="comments" name="comments" maxlength="300" inputmode="text"></textarea>
+
+            <input type="hidden" name="possible_bot" value="true">
+
+            <output id="error" name="error"></output>
+            <output id="info" name="info"></output>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <noscript>Javascript is disabled, some features may not work properly.</noscript>
+    <script>
+        // Placeholder for JavaScript
+    </script>
+</body>
+</html>

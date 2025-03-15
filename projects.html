@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online Portfolio with HTML ONLY">
+    <meta name="keywords" content="HTML">
+    <meta name="author" content="Jaira">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/main.css" rel="stylesheet">
+    <title>Projects page</title>
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --image-filter: none; /* Default filter for light mode */
+        }
+        [data-theme="dark"] {
+            --background-color: black;
+            --text-color: white;
+            --image-filter: invert(1); /* Invert colors for dark mode */
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 3fr 1fr 2fr;
+            grid-template-rows: 0.1fr 1fr 1fr;
+            gap: 10px;
+            grid-template-areas:
+            "h1 . . . nav"
+            ". projects projects . nav"
+            ". projects projects . nav"
+        }
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 0.5fr 0.1fr 1fr;
+                grid-template-areas:
+                "nav nav"
+                "h1 h1"
+                "projects projects"
+            }
+        }
+        /* Tablet & Restrictive Laptop Screens */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr 1fr 0.7fr;
+                grid-template-rows: 0.2fr 1fr 1fr;
+                grid-template-areas:
+                "h1 h1 nav"
+                "projects projects nav"
+                "projects projects nav"
+            }
+        }
+        h1 {
+            grid-area: h1;
+            font-size: calc(2.7dvw + 1dvh);
+            padding-left: 20px;
+        }
+        #project1 h2 {
+            font-size: calc(1dvw + 1dvh);
+        }
+        #project1 p {
+            font-size: calc(0.9dvw + 0.75dvh)
+        }
+        #projects-list {
+            grid-area: projects;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <nav>
+            <ul>
+                <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+        <h1>Projects</h1>
+        <section class="projects-container" id="projects-list"></section>
+    </main>
+
+    <noscript>Javascript is disabled, some features may not work properly.</noscript>
+    <script>
+        //Dark and Light mode theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+        });
+
+        //Project card coding
+        class ProjectCard extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            display: block;
+                            background-color: var(--card-bg);
+                            padding: 15px;
+                            border-radius: 8px;
+                            box-shadow: 0px 4px 6px var(--card-shadow);
+                            transition: transform 0.5s;
+                        }
+                        :host(:hover) {
+                            transform: scale(1.05);
+                        }
+                        h2 {margin: 0; font-size: 1.2rem;}
+                        p {font-size: 1rem; color: var(--text-color);}
+                        a {color: blue; text-decoration: none;}
+                        picture img{max-width: 100%; border-radius: 5px;}
+                    </style>
+                    <h2></h2>
+                    <picture>
+                        <img src="" alt="">
+                    </picture>
+                    <p></p>
+                    <a href="#" target="_blank">Click here to see Figma design</a>
+                `;
+            }
+            connectedCallback() {
+                this.shadowRoot.querySelector("h2").textContent = this.getAttribute("title");
+                this.shadowRoot.querySelector("img").src = this.getAttribute("image");
+                this.shadowRoot.querySelector("img").alt = this.getAttribute("alt");
+                this.shadowRoot.querySelector("p").textContent = this.getAttribute("description");
+                this.shadowRoot.querySelector("a").href = this.getAttribute("link");
+            }
+        }
+        customElements.define('project-card', ProjectCard);
+
+        const sampleProjects = [
+            {
+                title: "Grocery & Cooking App",
+                image: "images/GROCERY-APP.png",
+                alt: "Grocery App Screenshot",
+                description: "A grocery and cooking app that allows users to easily find new recipes and keep track of " +
+                    "their groceries. One feature is recipe tinder, in which users are given a recipe and they can choose" +
+                    " to like or dislike a recipe. Another feature is a receipt scanner that allows users to scan their " +
+                    "receipts and upload it to their virtual pantry.",
+                link: "https://www.figma.com/proto/9r7RyHn8One9VH4nq32Meb/Grocery%2FCooking-App?node-id=4-127&p=f&t=wrSh0UWjgd5Apj0J-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1"
+            },
+            {
+                title: "Redesign of API Management System",
+                image: "images/Login Page.png",
+                alt: "Screenshot of the Redesign of API Management System",
+                description: "Redesigning the API management system WSO2, simplifying the workflow for developers",
+                link: "https://www.figma.com/design/ANcLjWjbD8nqVQ7fozr75g/High-Fidelity-Prototypes?node-id=0-1&t=d5TZR1VNpauL0lRy-1"
+            },
+            {
+                title: "Case study of Redesign of API Management System",
+                image: "images/CaseStudy.png",
+                alt: "Screenshot of the Case study of Redesign of API Management System",
+                description: "Website for a group case study regarding the redesign of the API management system",
+                link: "https://sites.google.com/view/synergy-final-case-study/home",
+            }
+        ];
+        localStorage.setItem('projects', JSON.stringify(sampleProjects));
+
+        function loadProjects() {
+            const container = document.getElementById('projects-list');
+            const projects = JSON.parse(localStorage.getItem('projects'));
+            projects.forEach((proj) => {
+               const card = document.createElement('project-card');
+               card.setAttribute('title', proj.title);
+               card.setAttribute('image', proj.image);
+               card.setAttribute('alt', proj.alt);
+               card.setAttribute('description', proj.description);
+               card.setAttribute('link', proj.link);
+               container.appendChild(card);
+            });
+        }
+        async function fetchProjects() {
+            try {
+                const response = await fetch("projects.json");
+                const data = await response.json();
+                localStorage.setItem('projects', JSON.stringify(data));
+                loadProjects();
+            } catch (error) {
+                console.error("Failed to fetch projects", error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('projects')) {
+                fetchProjects();
+            } else {
+                loadProjects();
+            }
+        });
+    </script>
+</body>
+</html>

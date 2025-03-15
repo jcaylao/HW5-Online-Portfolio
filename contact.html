@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online Portfolio with HTML ONLY">
+    <meta name="keywords" content="HTML">
+    <meta name="author" content="Jaira">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/main.css" rel="stylesheet">
+    <title>Contact page</title>
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --image-filter: none; /* Default filter for light mode */
+        }
+        [data-theme="dark"] {
+            --background-color: black;
+            --text-color: white;
+            --image-filter: invert(1); /* Invert colors for dark mode */
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1.5fr 1.5fr 0.5fr 1fr 1fr 1fr 0.5fr 1.7fr;
+            grid-template-rows: 1fr 1fr 2fr 1fr;
+            grid-template-areas:
+            "h1 h1 . git email insta . nav"
+            ". form form form form form . nav"
+            ". form form form form form . nav"
+            ". form form form form form . nav"
+        }
+        h1 {
+            grid-area: h1;
+            font-size: calc(2.7dvw + 1dvh);
+            padding-left: 20px;
+        }
+        #git {grid-area: git;}
+        #insta {grid-area: insta;}
+        #email {grid-area: email;}
+
+        /*Form styling*/
+        form {
+            grid-area: form;
+            font-size: calc(1dvw + 1dvh);
+            max-width: 400px;
+            padding: 20px;
+            background: color(display-p3 0.95 0.95 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 5px;
+            color: black;
+        }
+        select,
+        input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s ease-in-out, background 0.3s ease-in-out;
+        }
+        select:focus,
+        input:focus {
+            border: 1px solid color(display-p3 0 0.5 1);
+            outline: none;
+            box-shadow: 0 0 5px color-mix(in srgb, blue 50%, white 50%);
+        }
+        input:user-invalid {
+            border: 2px solid red;
+        }
+        *:required {
+            background-color: palegoldenrod;
+        }
+        button {
+            font-size: 0.9em;
+            padding: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px 0;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s ease-in-out, background 0.3s ease-in-out;
+            resize: none;
+        }
+        /*Error Messages*/
+        #error-messages {
+            display: none;
+            color: red;
+            font-size: 0.9em;
+        }
+        input:user-invalid + #error-messages,
+        textarea:invalid + #error-messages {
+            display: block;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* Invalid input in form */
+        form:has(select:invalid) button {
+            background-color: gray;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        form:not(:has(select:invalid)) button {
+            background-color: color-mix(in srgb, #4aff00 70%, #000000 30%);
+            cursor: pointer;
+            pointer-events: auto;
+            animation: pulse 1s infinite ease-in-out;
+        }
+        img {
+            display: flex;
+            width: 5dvw;
+            height: 5dvw;
+            padding: 25px;
+            flex-direction: column;
+            justify-content: center;
+            filter: var(--image-filter);
+        }
+        h2 {
+            font-size: calc(1.2dvw + 1dvh);
+        }
+        /* Mobile*/
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr;
+                grid-template-areas:
+                "nav"
+                "h1"
+                "git"
+                "insta"
+                "email"
+                "form";
+            }
+            img {
+                margin-left: 50px;
+            }
+            form {
+                max-width: 40%;
+                padding: 15px;
+                margin: 20px;
+            }
+            label {
+                font-size: 0.9em;
+            }
+            select,
+            input {
+                font-size: 0.9em;
+                padding: 10px 0;
+            }
+            textarea {
+                padding: 10px 0;
+            }
+            button {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+        }
+        /* Tablet & restrictive laptops*/
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: 0.5fr 1fr 2fr 2fr;
+                grid-template-areas:
+                "h1 h1 h1 nav"
+                "git insta email nav"
+                "form form form nav"
+                ". . . nav";
+            }
+            form {
+                max-width: 450px;
+                padding: 18px;
+                margin: 20px;
+            }
+            label {
+                font-size: 1em;
+            }
+            select,
+            input {
+                font-size: 1em;
+                padding: 10px 0;
+            }
+            textarea {
+                padding: 10px 0;
+            }
+        }
+        .error-container {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 10px;
+            border: 1px solid red;
+            padding: 10px;
+            display: none;
+            background-color: #ffe6e6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <nav id = "nav-sidebar">
+            <ul>
+                <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+        <h1>Contact Me</h1>
+        <section id="git">
+            <a href="https://github.com/jcaylao">
+                <img src="images/Git-Icon.svg" alt="Github icon">
+            </a>
+        </section>
+        <section id="email">
+            <a href="mailto:jairavcaylao@gmail.com">
+                <img src="images/Email-icon.svg" alt="Email icon">
+            </a>
+        </section>
+        <section id="insta">
+            <a href="https://www.instagram.com/cayjaira/">
+                <img src="images/Insta-Icon.svg" alt="Instagram icon">
+            </a>
+        </section>
+
+        <form id="contact-form" action="https://httpbin.org/post" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" maxlength="30" required>
+
+            <label for="company-name">Company Name:</label>
+            <input type="text" id="company-name" name="company-name" maxlength="100">
+
+            <label for="email">Email:</label>
+            <input type="email" id="form-email" name="email" required>
+
+            <label for="phone-number">Phone Number<span aria-hidden="true"></span>:</label>
+            <input type="tel" id="phone-number" name="phone-number">
+
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" maxlength="300"></textarea>
+            <span class="char-count" id="char-count">300 characters remaining</span>
+
+            <input type="hidden" name="possible_bot" value="true">
+            <input type="hidden" name="form-errors" id="form-errors">
+
+            <div id="error-messages" class="error-container"></div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <noscript>Javascript is disabled, some features may not work properly.</noscript>
+    <script>
+        //Dark and Light mode theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+        });
+
+        //Validate the fields
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            const commentsInput = document.getElementById('comments');
+            const phoneInput = document.getElementById('phone-number');
+            const charCount = document.getElementById('char-count');
+            const errorContainer = document.getElementById('error-messages');
+            const errorField = document.getElementById('form-errors');
+            let form_errors= [];
+            //Check for invalid fields
+            const fields = [
+                { id: 'name', pattern: /^[a-zA-Z\s]*$/, errorMsg: 'Name can only contain letters and spaces.' },
+                { id: 'company-name', pattern: /^[a-zA-Z0-9\s\-]*$/, errorMsg: 'Company name can only contain letters, numbers, spaces, and hyphens.' },
+                { id: 'phone-number', pattern: /^\d{3}-\d{3}-\d{4}$/, errorMsg: 'Phone number must be in format 123-456-7890.' },
+                {id: 'comments', pattern: /^[a-zA-Z0-9 .,!?'"()\-]*$/, errorMsg: 'Invalid character detected in comment.'},
+            ];
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                input.addEventListener('input', function (event) {
+                    validateInput(input, field.pattern, field.errorMsg, field.id);
+                });
+                input.addEventListener('blur', function () {
+                    if (!input.checkValidity()) {
+                        logError(field.id, field.errorMsg);
+                    } else {
+                        removeError(field.id)
+                    }
+                });
+            });
+            function validateInput(input, pattern, errorMsg, fieldID) {
+                let originalValue = input.value;
+                let newValue = '';
+                let illegalCharDetected = false;
+                for (let char of originalValue) {
+                    if (pattern.test(char)) {
+                        newValue += char;
+                    } else {
+                        illegalCharDetected = true;
+                    }
+                }
+                if (illegalCharDetected) {
+                    flashField(this);
+                    logError(fieldID, `Illegal character detected ${field.id.replace('-', '')}.`);
+                }
+                if (originalValue !== newValue) {
+                    input.value = newValue;
+                } else {
+                    removeError(fieldID);
+                }
+            }
+            //Flash field
+            function flashField(input) {
+                input.classList.add('flash');
+                setTimeout(() => { input.classList.remove('flash') }, 500);
+            }
+            //Log errors to form_errors array
+            function logError(field, message) {
+                removeError(field);
+                form_errors.push({field, message});
+                updateErrorContainer();
+                errorField.value = JSON.stringify(form_errors);
+            }
+            //Remove errors
+            function removeError(field) {
+                form_errors = form_errors.filter(error => error.field !== field);
+                updateErrorContainer();
+                errorField.value = JSON.stringify(form_errors);
+            }
+            function updateErrorContainer() {
+                if (form_errors.length > 0) {
+                    errorContainer.innerHTML = form_errors.map(error => `<p>${error.message}</p>`).join('');
+                    errorContainer.style.display = 'block';
+                    // Fade out the message after 2 seconds
+                    setTimeout(() => {
+                        errorContainer.style.display = "none";
+                    }, 2000);
+                } else {
+                    errorContainer.innerHTML = '';
+                    errorContainer.style.display = 'none';
+                }
+            }
+            //Format phone number as XXX-XXX-XXXX and prevent invalid characters
+            phoneInput.addEventListener('input', function(event) {
+                let input = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+                if (input.length > 3 && input.length <= 6) {
+                    input = input.slice(0, 3) + '-' + input.slice(3);
+                } else if (input.length > 6) {
+                    input = input.slice(0, 3) + '-' + input.slice(3, 6) + '-' + input.slice(6, 10);
+                }
+                this.value = input;
+                if (input.length === 12) {
+                    removeError('phone-number');
+                } else {
+                    flashField(this);
+                    logError('phone-number', 'Phone number must be in format 123-456-7890');
+                }
+            });
+        //Character countdown for comment section
+        commentsInput.addEventListener("input", function() {
+            let remaining = 300 - this.value.length;
+            charCount.textContent = `${remaining} characters remaining`;
+
+            if (remaining <= 100 && remaining > 50 && remaining > 20) {
+                charCount.classList.add("warning");
+                charCount.classList.remove("error");
+                charCount.style.color = "#e0e019";
+            } else if (remaining <= 50 && remaining > 20) {
+                charCount.classList.add("warning");
+                charCount.classList.remove("error");
+                charCount.style.color = "orange";
+            } else if (remaining <= 20) {
+                charCount.classList.add("error");
+                charCount.classList.remove("warning");
+                charCount.style.color = "red";
+            } else {
+                charCount.classList.remove("warning", "error");
+                charCount.style.color = "black"
+            }
+            if (this.value.length > 300) {
+                this.value = this.value.substring(0, 300);
+                logError('comments', 'Character limit exceeded!');
+            } else {
+                removeError('comments');
+            }
+        });
+        //Form submission
+        form.addEventListener("submit", function(event) {
+            form_errors.length = 0;
+            errorContainer.innerHTML = '';
+            errorField.value = '';
+
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                if (!input.checkValidity()) {
+                    logError(field.id, field.errorMsg);
+                    event.preventDefault();
+                }
+            });
+            if (form_errors.length > 0) {
+                errorField.value = JSON.stringify(form_errors);
+                event.preventDefault();
+            }
+        });
+    });
+        </script>
+        </body>
+</html>

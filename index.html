@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online Portfolio with HTML ONLY">
+    <meta name="keywords" content="HTML">
+    <meta name="author" content="Jaira">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/main.css" rel="stylesheet">
+    <title>About me page</title>
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --image-filter: none; /* Default filter for light mode */
+        }
+        [data-theme="dark"] {
+            --background-color: black;
+            --text-color: white;
+            --image-filter: invert(1); /* Invert colors for dark mode */
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: 250px 100px 220px;
+            gap: 10px;
+            grid-template-areas:
+            "   aboutMe   aboutMe  . picture     nav"
+            "   .      .        .     picture   nav"
+            "hgroup hgroup hgroup picture nav"
+        }
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr;
+                grid-template-areas:
+                "nav"
+                "aboutMe"
+                "picture"
+                "hgroup";
+            }
+        }
+        /* Tablet & Restrictive Laptop Screens */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                grid-template-columns: 2fr 1fr;
+                grid-template-areas:
+            "aboutMe aboutMe nav"
+            "picture picture nav"
+            "hgroup hgroup nav";
+            }
+        }
+        .aboutMe {
+            grid-area: aboutMe;
+            padding: 0 20px;
+        }
+        .aboutMe h2{
+            font-size: calc(2.7dvw + 1dvh);
+        }
+        .aboutMe h3{
+            font-size: calc(1.5dvw + 1dvh);
+        }
+        picture {
+            grid-area: picture;
+            align-content: center;
+            width: 20vw;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #self-portrait {
+            width: 18dvw;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease-in-out;
+            filter: var(--image-filter);
+        }
+        #self-portrait:hover {
+            transform: rotate(360deg);
+        }
+        hgroup {
+            grid-area: hgroup;
+            padding: 20px;
+        }
+        hgroup h2{
+            font-size: calc(1.3dvw + 1dvh);
+        }
+        hgroup p {
+            font-size: calc(0.9dvw + 0.75dvh);
+        }
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <section class="aboutMe">
+            <h3>Hi! My name is</h3>
+            <h2>Jaira Caylao</h2>
+            <h3>UX/UI Designer & Developer</h3>
+        </section>
+
+        <nav id = "nav-sidebar">
+            <ul>
+                <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+
+        <hgroup>
+            <h2>About Me...</h2>
+            <p>I specialize in creating user-friendly websites and apps, as they are easy to use and navigate in order
+                to meet user needs. With a major in Cognitive Science focusing on Design & Interaction and a minor in
+                Computer Science, I have developed a strong foundation in design principles and coding. Some of my
+                hobbies include crocheting while binge-watching my current favorite shows, playing video games,
+                and spending time with friends & family.
+            </p>
+        </hgroup>
+        <picture>
+            <source media="(max-width: 768px)" srcset="images/Self-portrait.webp" type="image/webp">
+            <source media="(min-width: 1024px)" srcset="images/Self-portrait.svg" type="image/svg">
+            <img id="self-portrait" src="images/Self-portrait.svg" alt="here is a cartoon image of myself" loading="lazy">
+        </picture>
+    </main>
+
+    <!--Custom element script-->
+    <script>
+        //Define hello-world custom element
+        class HelloWorldCustomElement extends HTMLElement {
+            constructor() {
+                super();
+                console.log('Hello World!');
+            }
+        }
+        //Register hello-world
+        customElements.define('hello-world', HelloWorldCustomElement);
+
+        //Dark and Light mode theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+        });
+    </script>
+    <hello-world></hello-world>     <!--prints Hello World! in console-->
+</body>

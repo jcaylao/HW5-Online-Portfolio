@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online Portfolio with HTML ONLY">
+    <meta name="keywords" content="HTML">
+    <meta name="author" content="Jaira">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/main.css" rel="stylesheet">
+    <title>Skills page</title>
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --image-filter: none; /* Default filter for light mode */
+        }
+        [data-theme="dark"] {
+            --background-color: black;
+            --text-color: white;
+            --image-filter: invert(1); /* Invert colors for dark mode */
+        }        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: 0.1fr 1fr 1fr 0.1fr;
+            grid-template-areas:
+            "   h2 h2  .  . nav"
+            "   .   skill1   skill2    .    nav"
+            "   .   skill3   skill4    .    nav"
+            ". . . . nav"
+        }
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr;
+                grid-template-areas:
+                "nav nav"
+                "h2 h2"
+                "skill1 skill2"
+                "skill3 skill4";
+            }
+        }
+        /* Tablet & Restrictive Laptop Screens */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: 0.5fr 1fr 1fr;
+                grid-template-areas:
+                "h2 . . nav"
+                "skill1 skill2 . nav"
+                "skill3 skill4 . nav";
+
+            }
+        }
+        h2 {
+            grid-area: h2;
+            padding-left: 20px;
+            font-size: calc(2.7dvw + 1dvh);
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+        #skill1 {
+            grid-area: skill1;
+        }
+        #skill2 {
+            grid-area: skill2;
+        }
+        #skill3 {
+            grid-area: skill3;
+        }
+        #skill4 {
+            grid-area: skill4;
+        }
+        h3{
+            font-size: calc(1.2dvw + 1dvh);
+        }
+        img {
+            width: 10dvw;
+            height: auto;
+        }
+        #css-icon {
+            width: 12dvw;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <nav id = "nav-sidebar">
+            <ul>
+                <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+        <h2>Skills</h2>
+        <section id="skill1">
+            <h3>HTML</h3>
+            <img id="html-icon" src="images/HTML-ICON.webp" alt="HTML Icon" loading="lazy">
+        </section>
+        <section id="skill2">
+            <h3>CSS</h3>
+            <img id="css-icon" src="images/CSS-ICON.webp" alt="CSS Icon" loading="lazy">
+        </section>
+        <section id="skill3">
+            <h3>JavaScript</h3>
+            <img id="javascript-icon" src="images/JS-ICON.webp" alt="JavaScript Icon" loading="lazy">
+        </section>
+        <section id="skill4">
+            <h3>Figma</h3>
+            <img id="figma-icon" src="images/FIGMA-ICON.webp" alt="Figma Icon" loading="lazy">
+        </section>
+    </main>
+
+    <noscript>Javascript is disabled, some features may not work properly.</noscript>
+    <script>
+        //Dark and Light mode theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+        });
+    </script>
+</body>
+</html>
