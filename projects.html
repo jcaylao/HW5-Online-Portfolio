@@ -177,6 +177,10 @@
 
         function displayProjects(data) {
             projectContainer.innerHTML = '';
+            if(!data.length) { //Check if empty data
+                projectContainer.innerHTML = '<p>No projects available</p>';
+                return;
+            }
             data.forEach(proj => {
                const card = document.createElement('project-card');
                card.setAttribute('title', proj.title);
@@ -190,15 +194,24 @@
 
         document.getElementById('load-local').addEventListener('click', () => {
            const localData = JSON.parse(localStorage.getItem('projects')) || [];
+           if (!localData.length) {
+               alert('No local projects found.');
+           }
            displayProjects(localData);
         });
 
         document.getElementById('load-remote').addEventListener('click', async () => {
             try {
-                const response = await fetch('https://my-json-server.typicode.com/jcaylao/DEMO');
+                const response = await fetch('https://api.jsonbin.io/v3/b/67d69d268960c979a572953f', {
+                    headers: {
+                        "X-Master-Key": "$2a$10$uWS4u2d8sWxDH5KdxqKUW.ipB.hmbWCe3yra9S3dIUA7e.CnC.GAa"
+                    }
+                });
                 const data = await response.json();
-                localStorage.setItem('projects', JSON.stringify(data));
-                displayProjects(data);
+                console.log("Fetched data", data);
+                let projectData = data.record.posts;
+                localStorage.setItem('projects', JSON.stringify(projectData));
+                displayProjects(projectData);
             } catch (error) {
                 console.error('Error fetching remote projects: ', error);
             }
