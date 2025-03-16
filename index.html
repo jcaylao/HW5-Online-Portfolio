@@ -27,13 +27,13 @@
         }
         .container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: 250px 100px 220px;
-            gap: 10px;
+            grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+            grid-template-rows: 50px 250px 100px 150px;
             grid-template-areas:
-            "   aboutMe   aboutMe  . picture     nav"
-            "   .      .        .     picture   nav"
-            "hgroup hgroup hgroup picture nav"
+            "aboutMe aboutMe . . nav"
+            "aboutMe aboutMe picture . nav"
+            "hgroup hgroup hgroup . nav"
+            "hgroup hgroup hgroup . nav";
         }
         /* Mobile */
         @media (max-width: 768px) {
@@ -94,10 +94,6 @@
         }
         hgroup p {
             font-size: calc(0.9dvw + 0.75dvh);
-        }
-        .dark-mode {
-            background-color: black;
-            color: white;
         }
     </style>
 </head>
