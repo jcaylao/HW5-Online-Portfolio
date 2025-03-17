@@ -41,33 +41,9 @@
             grid-template-rows: 0.1fr 1fr 1fr;
             gap: 10px;
             grid-template-areas:
-            "h1 . . . nav"
+            "h1 buttons . . nav"
             ". projects projects . nav"
             ". projects projects . nav"
-        }
-        /* Mobile */
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 0.1fr 0.1fr 1fr;
-                grid-template-areas:
-                "nav nav"
-                "h1 h1"
-                "projects projects"
-            }
-            /*TODO: UPDATE RESPONSIVE DESIGN*/
-        }
-        /* Tablet & Restrictive Laptop Screens */
-        @media (min-width: 769px) and (max-width: 1200px) {
-            .container {
-                grid-template-columns: 1fr 1fr 0.7fr;
-                grid-template-rows: 0.2fr 1fr 1fr;
-                grid-template-areas:
-                "h1 h1 nav"
-                "projects projects nav"
-                "projects projects nav"
-            }
-            /*TODO: UPDATE RESPONSIVE DESIGN*/
         }
         h1 {
             grid-area: h1;
@@ -83,9 +59,60 @@
         .projects-container {
             grid-area: projects;
             display: grid;
-            grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Two smaller cards per row */
+            grid-template-columns: repeat(2, minmax(200px, 1fr));
             gap: 15px;
             padding: 10px;
+        }
+        .buttons-container {
+            grid-area: buttons;
+            display: flex;
+            align-items: center;
+        }
+        .buttons-container button {
+            background-color: var(--text-color);
+            color: var(--background-color);
+            border: none;
+            padding: 10px;
+            margin: 10px;
+            font-size: calc(0.9dvw + 0.75dvh);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-weight: bold;
+        }
+        /* Hover and Active Effects */
+        .buttons-container button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            transform: scale(1.05);
+        }
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr 0.7fr;
+                grid-template-rows: 0.2fr 1fr 1fr;
+                grid-template-areas:
+                "h1 buttons nav"
+                "projects projects nav"
+                "projects projects nav"
+            }
+            .projects-container {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(150px, 1fr));
+                gap: 10px;
+                padding: 10px;
+            }
+        }
+        /* Tablet & Restrictive Laptop Screens */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr 1fr 0.7fr;
+                grid-template-rows: 0.2fr 1fr 1fr;
+                grid-template-areas:
+                "h1 buttons nav"
+                "projects projects nav"
+                "projects projects nav"
+            }
         }
     </style>
 </head>
