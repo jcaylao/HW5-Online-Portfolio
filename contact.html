@@ -50,7 +50,7 @@
             font-size: calc(1dvw + 1dvh);
             max-width: 400px;
             padding: 20px;
-            background: color(display-p3 0.95 0.95 0.95);
+            background-color : rgba(234, 234, 234, 0.8);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -74,9 +74,9 @@
         }
         select:focus,
         input:focus {
-            border: 1px solid color(display-p3 0 0.5 1);
+            border: 1px solid rgb(0, 119, 255);
             outline: none;
-            box-shadow: 0 0 5px color-mix(in srgb, blue 50%, white 50%);
+            box-shadow: 0 0 5px rgb(0, 119, 255);
         }
         input:user-invalid {
             border: 2px solid red;
@@ -120,7 +120,7 @@
             cursor: not-allowed;
         }
         form:not(:has(select:invalid)) button {
-            background-color: color-mix(in srgb, #4aff00 70%, #000000 30%);
+            background-color: rgb(71, 165, 57);
             cursor: pointer;
             pointer-events: auto;
             animation: pulse 1s infinite ease-in-out;
@@ -252,7 +252,7 @@
             <label for="company-name">Company Name:</label>
             <input type="text" id="company-name" name="company-name" maxlength="100">
 
-            <label for="email">Email:</label>
+            <label for="form-email">Email:</label>
             <input type="email" id="form-email" name="email" required>
 
             <label for="phone-number">Phone Number<span aria-hidden="true"></span>:</label>
