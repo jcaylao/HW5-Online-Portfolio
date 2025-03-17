@@ -38,23 +38,23 @@
         /* Mobile */
         @media (max-width: 768px) {
             .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: 1fr;
+                grid-template-columns: 3fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
                 grid-template-areas:
-                "nav"
-                "aboutMe"
-                "picture"
-                "hgroup";
+            "aboutMe nav"
+            "picture nav"
+            "hgroup nav";
             }
         }
         /* Tablet & Restrictive Laptop Screens */
         @media (min-width: 769px) and (max-width: 1200px) {
             .container {
-                grid-template-columns: 2fr 1fr;
+                grid-template-columns: 3fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
                 grid-template-areas:
-            "aboutMe aboutMe nav"
-            "picture picture nav"
-            "hgroup hgroup nav";
+            "aboutMe nav"
+            "picture nav"
+            "hgroup nav";
             }
         }
         .aboutMe {
@@ -108,7 +108,9 @@
 
         <nav id = "nav-sidebar">
             <ul>
-                <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+                <li>
+                    <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Theme">🌙</button>
+                </li>
                 <li><a href="index.html">About Me</a></li>
                 <li><a href="skills.html">Skills</a></li>
                 <li><a href="projects.html">Projects</a></li>
@@ -163,6 +165,11 @@
             const savedTheme = localStorage.getItem('theme') || 'light';
             setTheme(savedTheme);
         });
+
+        // Add navbar toggle
+        function toggleMenu() {
+            document.getElementById("nav-links").classList.toggle("show");
+        }
     </script>
     <hello-world></hello-world>     <!--prints Hello World! in console-->
 </body>
